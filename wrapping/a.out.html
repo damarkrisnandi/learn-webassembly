@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Wrapping</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/style.css" rel="stylesheet">
+  <base href="/" target="">
+  <script src="a.out.js">
+
+  </script>
+</head>
+
+<body>
+  <p>Hello, WebAssembly!</p>
+
+  <script>
+    function run_wasm() {
+      const addNum = Module.cwrap(
+        "addNum",
+        "number",
+        ["number", "number"]
+      );
+
+      const substractNum = Module.cwrap(
+        "substractNum",
+        "number",
+        ["number", "number"]
+      );
+
+      const result = Module.ccall(
+        "main",
+        "number",
+        null,
+        null
+      )
+
+      console.log(result);
+
+      const a = document.getElementById("a");
+      const b = document.getElementById("b");
+
+      const result2 = addNum(a.value, b.value);
+      console.log("add", result2);
+
+      const result3 = substractNum(a.value, b.value);
+      console.log("substract", result3);
+    }
+  </script>
+  <input type="number" id="a">
+  <input type="number" id="b">
+  <button type="button" onclick="run_wasm()">Trigger</button>
+</body>
+
+</html>

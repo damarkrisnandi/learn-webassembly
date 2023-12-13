@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Wrapping</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/style.css" rel="stylesheet">
+  <base href="/" target="">
+  <script src="a.out.js">
+
+  </script>
+</head>
+
+<body>
+  <p>Hello, WebAssembly!</p>
+
+  <script>
+    function run_wasm() {
+      WebAssembly.instantiateStreaming(
+        fetch("streaming.wasm"), {}
+      ).then(result => {
+        console.log(result);
+        const a = document.getElementById("a").value;
+        const sum = result.instance.exports.sumOfNInteger(a);
+
+        const ret = document.getElementById("ret");
+        ret.innerHTML = sum;
+      })
+    }
+  </script>
+  <input type="number" id="a">
+  <!-- <input type="number" id="b"> -->
+  <button type="button" onclick="run_wasm()">Trigger</button>
+  <p id="ret"></p>
+</body>
+
+</html>
