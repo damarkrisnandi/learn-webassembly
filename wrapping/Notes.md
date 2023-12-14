@@ -9,9 +9,11 @@ Should add ``include <emscripten.h>`` and add ``EMSCRIPTEN_KEEPALIVE`` above eve
 and then
 
 ```
-emcc wrapping.c -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=[ccall]
+emcc wrapping.c -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=ccall,cwrap
 ```
 
 ```
 http-server . -p 4555
 ```
+
+
